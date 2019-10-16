@@ -7,7 +7,7 @@ class ListOfHotels extends Component {
     render() {
         let hotels = this.props.hotels.map((hotel,index) => {
             return (
-              <Hotel key={index} hotel= {hotel} />
+              <Hotel key={index}  hotel= {hotel} />
             );
           });
         return (

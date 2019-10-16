@@ -67,7 +67,7 @@ class Hotel extends Component {
                                     <Form.Control readOnly placeholder={this.props.hotel.price}/>
                                 </Form.Group>
 
-                                <Form.Group controlId="formGroupName">
+                                <Form.Group controlId="numberOfNights">
                                     <Form.Label>Number of nights : </Form.Label>
                                     <Form.Control placeholder="please put the number of nights" />
                                 </Form.Group>
@@ -83,7 +83,7 @@ class Hotel extends Component {
           </Button>
                             <Button  variant="primary" onClick={() => {this.showModal() ; this.showConfimation() ; 
                             ///    const hotelReservation  =  this.props.hotel ; hotelReservation['number'] = 3 ; 
-                                this.props.handleAddReservation({...this.props.hotel, number : 3})}}>
+                                this.props.handleAddReservation({...this.props.hotel, number : document.getElementById("numberOfNights").value})}}>
                                 Save Changes
           </Button>
                         </Modal.Footer>
@@ -99,8 +99,8 @@ class Hotel extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleAddReservation :(hotel , numberOfNight) => {
-        dispatch(addReservation(hotel , numberOfNight));
+        handleAddReservation :(hotel) => {
+        dispatch(addReservation(hotel));
       }
     
     }
