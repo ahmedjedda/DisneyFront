@@ -1,14 +1,10 @@
 import * as types from "../actions/types";
 
 
-const hotelsList = [{hotelName : "hotel1" , description : "this is a good hotel 3* Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue (conjugaisons, construction et association des phrases…)1. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku." , 
-image : "https://picsum.photos/id/59/200/300" , price : 200},{hotelName : "hotel2" , description : "this is a great hotel 5* Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue (conjugaisons, construction et association des phrases…)1. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku." , 
-image : "https://picsum.photos/id/60/200/300" , price : 520} , {hotelName : "hotel3" , description : "this is nice  hotel 4* Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue (conjugaisons, construction et association des phrases…)1. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku." , 
-image : "https://picsum.photos/id/61/200/300" , price : 300} , {hotelName : "hotel4" , description : "this is a coool hotel 2* Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue (conjugaisons, construction et association des phrases…)1. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku." , 
-image : "https://picsum.photos/id/62/200/300" , price : 80}];
 
 
-const hotelReducer = (state = {hotels : hotelsList , reservations : []}, action) => {
+
+const hotelReducer = (state = {hotels : [] , reservations : [], pending: false, error: null}, action) => {
   switch (action.type) {
     case types.ADD_RESERVATION:
         return { 
@@ -22,7 +18,33 @@ const hotelReducer = (state = {hotels : hotelsList , reservations : []}, action)
               ...state,
               reservations : state.reservations.filter((data) => data !== action.payload)
           }
-   
+
+           
+          case types.EMPTY_RESERVATIONS:
+            return {
+                ...state,
+                reservations : []
+            } 
+
+
+          case types.FETCH_HOTELS_PENDING : 
+          return {
+              ...state,
+              pending: true
+          }
+      case types.FETCH_HOTELS_SUCCESS:
+          return {
+              ...state,
+              pending: false,
+              hotels: action.payload
+          }
+      case types.FETCH_HOTELS_ERROR:
+          return {
+              ...state,
+              pending: false,
+              error: action.payload
+          }
+  
 
     default:
       return state;

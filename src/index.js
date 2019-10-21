@@ -8,12 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {createStore  , applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 
+const middlewares = [thunk];
 
 
  const store = createStore(hotelState, composeWithDevTools(
-  applyMiddleware()
+  applyMiddleware(...middlewares)
   // other store enhancers if any
 ));
 

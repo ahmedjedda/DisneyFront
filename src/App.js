@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import logo from './logo.svg';
 import Basket from './components/Basket';
 import { connect } from "react-redux";
+import fetchProducts from './effects/fetchHotels'
 
 
 
@@ -14,6 +15,10 @@ class App extends Component {
 
   componentDidMount(){
 console.log("hello app.js")  }
+
+componentWillMount() {
+  this.props.handleFetchHotels();
+}
   render() {
   
   return (
@@ -28,7 +33,9 @@ console.log("hello app.js")  }
       <Container><Row>
         <Col sm={7}>
         <ListOfHotels hotels={this.props.hotels} />
-
+        {this.props.error && 
+        <h2>there some problem !! check the console !!  </h2> 
+      }
         </Col>
         <Col sm={1}>
         </Col>
@@ -45,10 +52,21 @@ console.log("hello app.js")  }
     </div>
   );}
 }
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+      handleFetchHotels :() => {
+      dispatch(fetchProducts());
+    }
+  
+  }
+};
 const mapStateToProps = state => {
   return {
     hotels: state.hotels , 
-    reservations : state.reservations
+    reservations : state.reservations,
+    error : state.error
   };
 };
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
