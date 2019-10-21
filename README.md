@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-NB : you can find the  back end application in the repo : 
+NB : you can find the  back end application in the repo : https://github.com/ahmedjedda/DisneyBack.git
 ## Available Scripts
 
 In the project directory, you can run:
